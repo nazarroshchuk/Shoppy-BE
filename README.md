@@ -88,3 +88,18 @@ Run:
 ````bash
     npx prisma generate
 ````
+
+
+## Use Nest to generate a new module run command
+
+````bash
+  nest generate module <modulename>
+````
+#  new Controller
+````bash
+  nest generate controller <controllername>
+````
+# new Service
+````bash
+  nest generate service <servicename>
+````

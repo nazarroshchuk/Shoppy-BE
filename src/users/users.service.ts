@@ -6,6 +6,7 @@ import {
 import { CreateUserRequest } from './dto/create-user.request';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { Prisma } from '../../generated/prisma';
 
 @Injectable()
 export class UsersService {
@@ -38,5 +39,11 @@ export class UsersService {
       }
       throw e;
     }
+  }
+
+  async getUser(filter: Prisma.UserWhereUniqueInput) {
+    return this.prismaService.user.findUniqueOrThrow({
+      where: filter,
+    });
   }
 }
