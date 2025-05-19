@@ -29,7 +29,7 @@ export class AuthService {
     );
 
     const tokenPayload: TokenPayloadInterface = {
-      userID: user.id,
+      userId: user.id,
     };
     const token = this.jwtService.sign(tokenPayload);
 

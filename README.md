@@ -56,7 +56,7 @@ Check out a few resources that may come in handy when working with NestJS:
 
 ## Prisma
 
-Run the following command in your project root:
+#### Run the following command in your project root:
 
 ```bash
    npx prisma generate
@@ -89,17 +89,24 @@ Run:
     npx prisma generate
 ````
 
+#### After adding new Schema into schema.prisma file to migrate and populate use command
+````bash
+npx run prisma migrate dev
+````
+after command type a name of table and pres Enter. 
+All database migrations you can see in prisma/migrations/...
+
 
 ## Use Nest to generate a new module run command
 
 ````bash
-  nest generate module <modulename>
+  npx nest generate module <modulename>
 ````
 #  new Controller
 ````bash
-  nest generate controller <controllername>
+  npx nest generate controller <controllername>
 ````
 # new Service
 ````bash
-  nest generate service <servicename>
+  npx nest generate service <servicename>
 ````
