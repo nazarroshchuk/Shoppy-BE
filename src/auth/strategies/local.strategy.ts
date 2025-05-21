@@ -13,4 +13,3 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     return this.authService.verifyUser(username, password);
   }
 }
-
