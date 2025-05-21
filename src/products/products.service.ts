@@ -2,25 +2,36 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductRequest } from './dto/create-product.request';
 import { PrismaService } from '../prisma/prisma.service';
 import { promises as fs } from 'fs';
-import { join } from 'path';
 import { PRODUCT_IMAGES } from './product-images';
 import { Prisma } from 'generated/prisma';
+import { ProductsGateway } from './websocket/products.geteway';
 
 @Injectable()
 export class ProductsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly productGateway: ProductsGateway,
+  ) {}
 
   async createProduct(data: CreateProductRequest, userId: number) {
-    return this.prismaService.product.create({
+    const product = await this.prismaService.product.create({
       data: {
         ...data,
         userId,
       },
     });
+
+    this.productGateway.handleProductUpdated();
+    return product;
   }
 
-  async getProducts() {
-    const products = await this.prismaService.product.findMany();
+  async getProducts(status?: string) {
+    const args: Prisma.ProductFindManyArgs = {};
+    if (status === 'available') {
+      args.where = { sold: false };
+    }
+
+    const products = await this.prismaService.product.findMany(args);
     return Promise.all(
       products.map(async (product) => ({
         ...product,
@@ -46,6 +57,8 @@ export class ProductsService {
       where: { id: productId },
       data,
     });
+
+    this.productGateway.handleProductUpdated();
   }
 
   private async imageExists(productId: number) {
