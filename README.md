@@ -89,9 +89,9 @@ Run:
     npx prisma generate
 ````
 
-#### After adding new Schema into schema.prisma file to migrate and populate use command
+#### After adding new Schema of new field into schema.prisma file to migrate and populate use command
 ````bash
-npx run prisma migrate dev
+npx prisma migrate dev
 ````
 after command type a name of table and pres Enter. 
 All database migrations you can see in prisma/migrations/...
@@ -110,3 +110,13 @@ All database migrations you can see in prisma/migrations/...
 ````bash
   npx nest generate service <servicename>
 ````
+
+# PAYMENT UTILS Stripe
+Use an account (nazarroshchuk@gmail.com - safary pass)
+On dashboard Developers => API keys or create a new sandbox and watch  Secret Key
+https://dashboard.stripe.com/test/dashboard
+
+#### For testing https://docs.stripe.com/testing, testing cards
+
+## Get started with the Stripe CLI
+https://docs.stripe.com/stripe-cli
